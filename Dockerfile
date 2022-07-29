@@ -25,7 +25,7 @@ ENV APACHE_SPARK_VERSION="${spark_version}" \
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
     "openjdk-${openjdk_version}-jre-headless" \
-    ca-certificates-java && \
+    ca-certificates-java awscli && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Spark installation
