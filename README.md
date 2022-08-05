@@ -10,7 +10,7 @@ After cloning the repo run following set of commands to get your pyspark jupyter
 ```sh
 cd pyspark-mongo-boilerplate # changing directory to the folder where Dockerfile is present
 docker build -t pyspark-mongo-base .
-docker run -p 10000:8888 pyspark-mongo-base
+docker run -e AWS_ACCESS_KEY_ID=<ACCESS_KEY_ID> -e AWS_SECRET_ACCESS_KEY=<SECRET_ACCESS_KEY> -e AWS_DEFAULT_REGION=us-west-2 -p 10000:8888 pyspark-mongo-base
 ```
 
 Output of last command will give you a URL like:
