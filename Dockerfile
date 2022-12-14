@@ -18,9 +18,11 @@ USER root
 ARG spark_version="3.3.0"
 ARG hadoop_version="3"
 ARG openjdk_version="17"
+ARG scala_version="2.12.10"
 
 ENV APACHE_SPARK_VERSION="${spark_version}" \
-    HADOOP_VERSION="${hadoop_version}"
+    HADOOP_VERSION="${hadoop_version}" \
+    SCALA_VERSION="${scala_version}"
 
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
@@ -33,6 +35,13 @@ WORKDIR /tmp
 RUN wget -q --no-check-certificate "https://archive.apache.org/dist/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" && \
     tar xzf "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" -C /usr/local --owner root --group root --no-same-owner && \
     rm "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz"
+
+RUN wget -q --no-check-certificate "https://downloads.lightbend.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz" && \
+  tar xzf scala-$SCALA_VERSION.tgz -C /tmp/ && \
+  mkdir /usr/local/scala-$SCALA_VERSION && \
+  mv /tmp/scala-$SCALA_VERSION/* /usr/local/ && \
+  rm -rf scala-$SCALA_VERSION.tgz 
+ENV SCALA_HOME=/usr/local/scala-$SCALA_VERSION
 
 WORKDIR /usr/local
 
