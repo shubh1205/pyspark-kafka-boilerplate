@@ -39,7 +39,7 @@ RUN wget -q --no-check-certificate "https://archive.apache.org/dist/spark/spark-
 RUN wget -q --no-check-certificate "https://downloads.lightbend.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz" && \
   tar xzf scala-$SCALA_VERSION.tgz -C /tmp/ && \
   mkdir /usr/local/scala-$SCALA_VERSION && \
-  mv /tmp/scala-$SCALA_VERSION/* /usr/local/ && \
+  mv /tmp/scala-$SCALA_VERSION/* /usr/local/scala-$SCALA_VERSION && \
   rm -rf scala-$SCALA_VERSION.tgz 
 ENV SCALA_HOME=/usr/local/scala-$SCALA_VERSION
 
