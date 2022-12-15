@@ -41,7 +41,7 @@ RUN wget -q --no-check-certificate "https://downloads.lightbend.com/scala/$SCALA
   mkdir /usr/local/scala-$SCALA_VERSION && \
   mv /tmp/scala-$SCALA_VERSION/* /usr/local/scala-$SCALA_VERSION && \
   rm -rf scala-$SCALA_VERSION.tgz 
-ENV SCALA_HOME=/usr/local/scala-$SCALA_VERSION
+ENV SCALA_HOME=/usr/local/scala-$SCALA_VERSION/bin
 
 WORKDIR /usr/local
 
