@@ -46,7 +46,7 @@ RUN wget -q --no-check-certificate "https://downloads.lightbend.com/scala/$SCALA
 ENV SCALA_HOME=/usr/local/scala-$SCALA_VERSION/bin
 
 # Kafka instalation
-RUN wget "https://archive.apache.org/dist/kafka/$KAFKA_VERSION/kafka_2.12-$KAFKA_VERSION.tgz" && \
+RUN wget -q --no-check-certificate "https://archive.apache.org/dist/kafka/$KAFKA_VERSION/kafka_2.12-$KAFKA_VERSION.tgz" && \
   tar xzf kafka_2.12-$KAFKA_VERSION.tgz && \
   mkdir /usr/local/kafka_2.12-$KAFKA_VERSION && \
   mv /tmp/kafka_2.12-$KAFKA_VERSION/* /usr/local/kafka_2.12-$KAFKA_VERSION && \
