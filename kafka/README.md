@@ -29,6 +29,7 @@ Consume data using python script:
 ```
     python consumer.py
 ```
+Output will be visible on terminal.
 
 #### Kafka streaming with pyspark:
 Produce streaming data using pyspark script:
@@ -39,6 +40,7 @@ Consume streaming data using pyspark script:
 ```
     python stream_consumer.py
 ```
+Folder called "output", will be created in same folder.
 
 Consume data using kafka sh:
 ```
