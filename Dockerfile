@@ -19,10 +19,12 @@ ARG spark_version="3.3.0"
 ARG hadoop_version="3"
 ARG openjdk_version="17"
 ARG scala_version="2.12.10"
+ARG kafka_version="3.3.2"
 
 ENV APACHE_SPARK_VERSION="${spark_version}" \
     HADOOP_VERSION="${hadoop_version}" \
-    SCALA_VERSION="${scala_version}"
+    SCALA_VERSION="${scala_version}" \
+    KAFKA_VERSION="${kafka_version}"
 
 RUN apt-get update --yes && \
     apt-get install --yes --no-install-recommends \
@@ -43,12 +45,23 @@ RUN wget -q --no-check-certificate "https://downloads.lightbend.com/scala/$SCALA
   rm -rf scala-$SCALA_VERSION.tgz 
 ENV SCALA_HOME=/usr/local/scala-$SCALA_VERSION/bin
 
+# Kafka instalation
+RUN wget -q --no-check-certificate "https://archive.apache.org/dist/kafka/$KAFKA_VERSION/kafka_2.12-$KAFKA_VERSION.tgz" && \
+  tar xzf kafka_2.12-$KAFKA_VERSION.tgz && \
+  mkdir /usr/local/kafka_2.12-$KAFKA_VERSION && \
+  mv /tmp/kafka_2.12-$KAFKA_VERSION/* /usr/local/kafka_2.12-$KAFKA_VERSION && \
+  rm -rf kafka_2.12-$KAFKA_VERSION.tgz
+
 WORKDIR /usr/local
 
 # Configure Spark
 ENV SPARK_HOME=/usr/local/spark
 ENV SPARK_OPTS="--driver-java-options=-Xms1024M --driver-java-options=-Xmx4096M --driver-java-options=-Dlog4j.logLevel=info" \
     PATH="${PATH}:${SPARK_HOME}/bin"
+
+# Configure Kafka
+ENV KAFKA=/usr/local/kafka_2.12-$KAFKA_VERSION
+ENV PATH="${PATH}:${KAFKA}/bin"
 
 RUN ln -s "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}" spark && \
     # Add a link in the before_notebook hook in order to source automatically PYTHONPATH
@@ -58,6 +71,9 @@ RUN ln -s "spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}" spark && \
 # Configure IPython system-wide
 COPY ipython_kernel_config.py "/etc/ipython/"
 RUN fix-permissions "/etc/ipython/"
+
+# Configure Kafka system-wide
+RUN fix-permissions "/usr/local/kafka_2.12-$KAFKA_VERSION/"
 
 # Python packages installation
 COPY requirements.txt "/tmp/"
