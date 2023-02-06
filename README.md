@@ -1,5 +1,5 @@
-# Pyspark Mongo Boilerplate
-This is a boilerplate which has dependencies for pyspark(3.3.0) mongo(>4.x) connectivity
+# Pyspark Kafka Boilerplate
+This is a boilerplate which has dependencies for pyspark(3.3.0), Kafka(3.3.2) and mongo(>4.x) connectivity
 
 This is built on top of the docker image provided by docker stacks [here](https://hub.docker.com/r/jupyter/pyspark-notebook). 
 It involves change to scala version to 2.12 from 2.13 as latest version of mongo-spark-connector(10.0.2) is not compatible with the latter.
@@ -15,7 +15,7 @@ run docker without aws creds:
     docker run -p 10000:8888 pyspark-mongo-base
 
 run docker with aws creds:
-docker run -e AWS_ACCESS_KEY_ID=<ACCESS_KEY_ID> -e AWS_SECRET_ACCESS_KEY=<SECRET_ACCESS_KEY> -e AWS_DEFAULT_REGION=us-west-2 -p 10000:8888 pyspark-mongo-base
+    docker run -e AWS_ACCESS_KEY_ID=<ACCESS_KEY_ID> -e AWS_SECRET_ACCESS_KEY=<SECRET_ACCESS_KEY> -e AWS_DEFAULT_REGION=us-west-2 -p 10000:8888 pyspark-mongo-base
 ```
 
 Output of last command will give you a URL like:
