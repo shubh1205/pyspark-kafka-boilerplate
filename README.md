@@ -19,4 +19,4 @@ run docker with aws creds:
 ```
 
 Output of last command will give you a URL like:
-http://127.0.0.1:8888/lab?token=token but our notebook will be running on port 10000 as we have mapped the 8888 port of docker container to 10000 port of host machine so browse to http://127.0.0.1:10000/lab?token=token in browser and **here we go!!**
+http://127.0.0.1:8888/lab?token=<token> but our notebook will be running on port 10000 as we have mapped the 8888 port of docker container to 10000 port of host machine so browse to http://127.0.0.1:10000/lab?token=<token> in browser and **here we go!!**
