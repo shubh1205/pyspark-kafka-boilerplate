@@ -32,6 +32,12 @@ RUN apt-get update --yes && \
     ca-certificates-java awscli && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+#AZURE
+RUN apt-get update --yes && \
+    apt-get install --yes curl gnupg && \
+    curl -sL https://aka.ms/InstallAzureCLIDeb | bash && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Spark installation
 WORKDIR /tmp
 RUN wget -q --no-check-certificate "https://archive.apache.org/dist/spark/spark-${APACHE_SPARK_VERSION}/spark-${APACHE_SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz" && \
