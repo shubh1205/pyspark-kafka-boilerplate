@@ -11,7 +11,7 @@ After cloning the repo run following set of commands to get your pyspark jupyter
 cd pyspark-mongo-boilerplate # changing directory to the folder where Dockerfile is present
 docker build -t pyspark-mongo-base .
 
-run docker without aws creds:
+run docker:
     docker run -p 10000:8888 pyspark-mongo-base
 
 run docker with aws creds:
