@@ -1,4 +1,4 @@
-# Pyspark Kafka Boilerplate
+# Pyspark Kafka Boilerplate with AWS and Azure CLI
 This is a boilerplate which has dependencies for pyspark(3.3.0), Kafka(3.3.2) and mongo(>4.x) connectivity
 
 This is built on top of the docker image provided by docker stacks [here](https://hub.docker.com/r/jupyter/pyspark-notebook). 
