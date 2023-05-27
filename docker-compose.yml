@@ -1,0 +1,22 @@
+version: "3"
+services:
+  web:
+    container_name: pyspark-mongo-base
+    image: aman2404/pyspark-mongo-base:latest
+    ports:
+      - "10000:8888"
+    depends_on:
+      - localstack
+  localstack:
+    image: localstack/localstack:latest
+    environment: 
+      - AWS_DEFAULT_REGION=us-east-1
+      - EDGE_PORT=4566
+      - SERVICES=api,cloudformation,cloudwatch,dynamodb,dynamodbstreams,ec2,es,firehose,iam,kinesis,lambda,logs,redshift,route53,s3,secretsmanager,ses,sns,sqs
+      - DATA_DIR=/tmp/localstack/
+      - PERSISTENCE=1
+    ports: 
+      - '4566-4583:4566-4583'
+    volumes: 
+      - "./localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
