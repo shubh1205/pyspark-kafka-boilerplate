@@ -1,8 +1,8 @@
 version: "3"
 services:
   web:
-    container_name: pyspark-mongo-base
-    image: aman2404/pyspark-mongo-base:latest
+    container_name: pyspark-kafka-base
+    image: aman2404/pyspark-kafka-base:latest 
     ports:
       - "10000:8888"
     depends_on:
