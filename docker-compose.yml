@@ -1,8 +1,11 @@
+
 version: "3"
 services:
-  web:
-    container_name: pyspark-kafka-base
-    image: aman2404/pyspark-kafka-base:latest 
+  pysparkkafka:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pyspark-kafka-base1
     ports:
       - "10000:8888"
     depends_on:
