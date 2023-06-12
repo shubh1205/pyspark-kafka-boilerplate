@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: pyspark-kafka-base1
+    container_name: pyspark-kafka-base
     ports:
       - "10000:8888"
     depends_on:
