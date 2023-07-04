@@ -5,7 +5,7 @@ This is built on top of the docker image provided by docker stacks [here](https:
 It involves change to scala version to 2.12 from 2.13 as latest version of mongo-spark-connector(10.0.2) is not compatible with the latter.
 
 ## Setup steps
-After cloning the repo run following set of commands to get your pyspark jupyter notebook running:
+If you just want to use Spark or Kafka without localstack After cloning the repo run following set of commands to get your pyspark jupyter notebook running:
 
 ```sh
 cd pyspark-mongo-boilerplate # changing directory to the folder where Dockerfile is present
@@ -19,6 +19,13 @@ run docker with aws creds:
 
 run docker with azure creds:
     docker run -e AZURE_TENANT_ID=<TENANT_ID> -e AZURE_CLIENT_ID=<CLIENT_ID> -e AZURE_CLIENT_SECRET=<CLIENT_SECRET> -p 10000:8888 pyspark-mongo-base
+```
+
+If you want use it with localstack run following set of command:
+
+```sh
+cd pyspark-mongo-boilerplate # changing directory to the folder where Dockerfile is present
+docker compose up
 ```
 
 Output of last command will give you a URL like:
