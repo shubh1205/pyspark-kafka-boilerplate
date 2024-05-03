@@ -81,6 +81,15 @@ RUN fix-permissions "/etc/ipython/"
 # Configure Kafka system-wide
 RUN fix-permissions "/usr/local/kafka_2.12-$KAFKA_VERSION/"
 
+# Create directory for Spark event logs and set permissions
+RUN mkdir -p /tmp/spark-events && \
+    chown -R $NB_UID /tmp/spark-events
+
+# Add configuration for Spark History Server
+RUN echo "spark.eventLog.enabled          true" >> ${SPARK_HOME}/conf/spark-defaults.conf && \
+    echo "spark.eventLog.dir              file:///tmp/spark-events" >> ${SPARK_HOME}/conf/spark-defaults.conf && \
+    echo "spark.history.fs.logDirectory   file:///tmp/spark-events" >> ${SPARK_HOME}/conf/spark-defaults.conf
+
 # Python packages installation
 COPY requirements.txt "/tmp/"
 RUN pip install -r /tmp/requirements.txt

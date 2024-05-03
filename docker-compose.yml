@@ -8,6 +8,7 @@ services:
     container_name: pyspark-kafka-base
     ports:
       - "10000:8888"
+      - "4040:4040"   # Spark UI port
     depends_on:
       - localstack
   localstack:
@@ -23,3 +24,4 @@ services:
     volumes: 
       - "./localstack:/tmp/localstack"
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./spark-events:/tmp/spark-events"
